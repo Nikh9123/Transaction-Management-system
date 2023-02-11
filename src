@@ -1,0 +1,150 @@
+create table accountDetailsCust(act_no varchar2(10), act_name varchar2(10), act_balance number(10), act_dob date);
+drop table accountDetailsCust ;
+
+create table account_branch_details(act_no varchar2(10), act_name varchar2(10), act_branch varchar2(10));
+
+create table account_city_details(act_no varchar2(10), act_name varchar2(10), act_city varchar2(10));
+
+
+create table custDetails(act_no varchar2(10), act_name varchar2(10), cust_city varchar2(10),cust_phno number(10) , cust_email varchar2(20) , cust_fathername varchar2(20),cust_address varchar(20));
+
+
+
+insert into custDetails values('19DCS001','Rajesh','Ganganagar','9982586461','rajesh123@gmail.com','Suman Mishra','Anupgarh');
+insert into custDetails  values('35540426','Kamal','koderma','9982586471','kamal123@gmail.com','Keshav Jha','Dandadi');
+insert into custDetails values('35547203','Rameswar','Chatra','9782586482','ramar123@gmail.com','Mantu Jha','Itkhori');
+insert into custDetails values('35567004','Nagendra','Dumka','9982586468','nagendra@gmail.com','Suraj modi','Palipur');
+insert into custDetails values('19DCS004','Nagendra','Neel','9982586468','Neel@gmail.com','Shiv modi','sherpur');
+insert into custDetails values('35567004','Parimal','mumbai','9982534468','Parimal@gmail.com','Ishan sharma','Bikaner');
+insert into custDetails values('35567004','Nagendra','Dumka','9982586468','nagendra@gmail.com','Suraj modi','Palipur');
+
+----------account details------------------
+
+insert into accountDetailsCust values('19DCS001','Rajesh','35000','12-7-2001');
+insert into accountDetailsCust values('19DCS002','Shyam','30000','05-1-1993');
+insert into accountDetailsCust values('19DCS003','Bimal','55000','12-9-1997');
+insert into accountDetailsCust values('19DCS004','Neel','46000','3-9-2000');
+insert into accountDetailsCust values('19DCS005','Tushar','37900','7-2-2002');
+insert into accountDetailsCust values('19DCS006','Falguni','35060','11-7-1998');
+insert into accountDetailsCust values('19DCS007','Parimal','12070','9-17-2001');
+insert into accountDetailsCust values('19DCS008','Apu','17800','12-7-1994');
+insert into accountDetailsCust values('19DCS009','Sheetal','65070','2-6-1995');
+insert into accountDetailsCust values('19DCS010','Shiv','35600','07-5-1999');
+
+
+insert into accountDetailsCust values('19DCS011','Ashish','90000','11-11-11');
+insert into accountDetailsCust values('35540426','NIKHIL','56000','11-8-11');
+insert into accountDetailsCust values('35540567','Aditya','78000','1-8-11');
+
+
+
+
+
+--------------account branch details-----------------------
+
+insert into account_branch_details values('19DCS001','Rajesh','Manjalpur');
+insert into account_branch_details values('19DCS002','Shyam','MG Road');
+insert into account_branch_details values('19DCS003','Bimal','Mayapuri');
+insert into account_branch_details values('19DCS004','Neel','Borivali');
+insert into account_branch_details values('19DCS005','Tushar','Ghogha');
+insert into account_branch_details values('19DCS006','Falguni','Powai');
+insert into account_branch_details values('19DCS007','Parimal','Dum Dum');
+insert into account_branch_details values('19DCS008','Apu','Hinjewadi');
+insert into account_branch_details values('19DCS009','Sheetal','Maninagar');
+insert into account_branch_details values('19DCS010','Shiv','Gachibowli');
+insert into account_branch_details values('19DCS011','Ashish','RANCHI');
+insert into account_branch_details values('35540426','NIKHIL','Koderma');
+insert into account_branch_details values('35540567','Aditya','Chatra');
+
+
+
+
+
+--------------account based on different cities----------------------------------
+
+
+insert into account_city_details values('19DCS001','Rajesh','Vadodara');
+insert into account_city_details values('19DCS002','Shyam','Bangalore');
+insert into account_city_details values('19DCS003','Bimal','Delhi');
+insert into account_city_details values('19DCS004','Neel','Mumbai');
+insert into account_city_details values('19DCS005','Tushar','Bhavnagar');
+insert into account_city_details values('19DCS006','Falguni','Mumbai');
+insert into account_city_details values('19DCS007','Parimala','Kolkata');
+insert into account_city_details values('19DCS008','Apu','Pune');
+insert into account_city_details values('19DCS009','Sheetal','Ahmedabad');
+insert into account_city_details values('19DCS010','Shiv','Hyderabad');
+
+insert into account_city_details values('19DCS011','Ashish','Ganganagar');
+insert into account_branch_details values('35540426','NIKHIL','Jaingagar');
+insert into account_branch_details values('35540567','Aditya','Dumka');
+
+
+create table AccountType(act_no varchar2(10) PRIMARY KEY, act_type1 varchar2(20) , act_type2 varchar2(20));
+drop table AccountType ;
+insert into AccountType values('19DCS001','saving account' , 'current account');
+insert into AccountType values('19DCS002','saving account' , 'current account');
+insert into AccountType values('19DCS003','saving account' , 'current account');
+insert into AccountType values('19DCS004','saving account' , 'current account');
+insert into AccountType values('19DCS005','saving account' , 'current account');
+insert into AccountType values('19DCS006','saving account' , 'current account');
+insert into AccountType values('19DCS007','saving account' , 'current account');
+insert into AccountType values('19DCS008','saving account' , 'current account');
+insert into AccountType values('19DCS009','saving account' , 'current account');
+insert into AccountType values('19DCS010','saving account' , 'current account');
+
+
+
+select * from accountDetailsCust ;
+select * from account_branch_details ;
+select * from account_city_details ;
+select * from custdetails ;
+
+DECLARE 
+xact_no accountDetailsCust.act_no%type;
+xact_balance accountDetailsCust.act_balance%type;
+opt number(1); 
+deposit number(10);
+withdrawal number(10);
+act_type number(5);
+
+BEGIN
+xact_no:= :Enter_Account_Number;
+opt:= :1Deposit_2Withdrawal_3Balance; 
+act_type:= :1current_2saving; 
+select act_balance into xact_balance 
+from accountDetailsCust 
+where act_no=xact_no ; 
+  
+IF( opt = 1 and act_type = 1  ) THEN
+deposit:= :Enter_Deposit_Amount;
+update accountDetailsCust 
+ set act_balance=act_balance+deposit
+where act_no=xact_no ; 
+
+xact_balance :=xact_balance +deposit;
+dbms_output.put_line('Rs. '||deposit||' has been creadited in your account');
+dbms_output.put_line('Your final balance is Rs. '||xact_balance );
+                          
+ELSIF( opt = 2 and act_type = 2 ) THEN 
+withdrawal:= :Enter_Withdrawal_Amount;
+    IF ( withdrawal<=xact_balance ) THEN
+    update account
+     set act_balance=act_balance-withdrawal
+    where act_no=xact_no ;
+    
+    xact_balance:=xact_balance -withdrawal;
+    dbms_output.put_line('Rs. '||withdrawal||' has been debited in your account');
+    dbms_output.put_line('Your final balance is Rs.'||xact_balance );
+    
+    ELSE
+    dbms_output.put_line('Your withdrawal amount is greater than balance');
+    dbms_output.put_line('Your transaction failed');
+    dbms_output.put_line('Your final balance is Rs.'||xact_balance ); 
+    END IF;
+
+ELSE
+dbms_output.put_line('Your balance is Rs. '||xact_balance );
+END IF;
+    
+  
+END;
